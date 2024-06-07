@@ -1,4 +1,4 @@
-//Ve hinh chu nhat rong
+//Vẽ hình vuông rỗng
 #include <iostream>
 using namespace std;
 
