@@ -21,6 +21,7 @@ int main(){
     Employee *myEmployee = new Employee;
     initStruct(myEmployee);
     Display(myEmployee);
+    delete myEmployee;
     return 0;
 }
 

@@ -24,14 +24,18 @@ int main(){
     cout<<"Nhập số lượng nhân viên: "; cin>>length;
     Employee *myEmployee = new Employee[length];
     initStruct(myEmployee, length);
+    
     //Nhân viên có lương cao nhất
     cout<<"Nhân viên có lương cao nhất"<<endl;
     Employee tempEmployee = searchSalaryMax(myEmployee, length);
     Display(tempEmployee, length);
+
     //Nhân viên có lương thấp nhất
     cout<<"Nhân viên có lương thấp nhất"<<endl;
     tempEmployee = searchSalaryMin(myEmployee, length);
     Display(tempEmployee, length);
+    
+    delete []myEmployee;
     return 0;
 }
 
