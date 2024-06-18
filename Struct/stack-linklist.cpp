@@ -13,6 +13,7 @@ class Stack {
         // Constructor
         Stack() : top(nullptr) {}
         // Destructor
+        // Giai phóng bộ nhớ của tất cả các node khi stack bị hủy
         ~Stack() {
             while(!isEmpty()) {
                 pop();
