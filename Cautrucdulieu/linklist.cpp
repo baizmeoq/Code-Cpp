@@ -22,6 +22,8 @@ class LinkedList {
         void insertHead(int value);
         void insertTail(int value);
         void deleteNode(int key);
+        void insertAt(int value, int position);
+        void deleteAt(int position);
         void printList();
 
         ~LinkedList() {
@@ -81,7 +83,51 @@ void LinkedList::deleteNode(int key) {
     prev->next = temp->next;
     delete temp;
 
-};
+}
+void LinkedList::insertAt(int value, int position){
+    Node* newNode = new Node(value);
+    if(position == 0) {
+        newNode->next = head;
+        head = newNode;
+        return;
+    }
+    Node* current = head;
+    for(int i=0; current != nullptr && i < position -1; ++i) {
+        current = current->next;
+    }
+    if(current == nullptr) {
+        cout<<"Vị trí nằm ngoài giới hạn"<<endl;
+        delete newNode;
+        return;
+    }
+    // Chèn node mới
+    newNode->next = current->next;
+    current->next = newNode; 
+}
+void LinkedList::deleteAt(int position) {
+    Node* temp = head;
+    if(head == nullptr) {
+        cout<<"List rỗng"<<endl;
+        return;
+    }
+    if(position == 0) {
+        head = head->next;
+        delete temp;
+        return;
+    }
+    // Tìm node trước node cần xóa
+    for(int i=0; temp != nullptr && i < position-1; ++i) {
+        temp = temp->next;
+    }
+    // Vị trí vượt quá chiều dài của danh sách
+    if(temp == nullptr || temp->next == nullptr) {
+        cout<<"Vị trí nằm ngoài giới hạn"<<endl;
+        return;
+    }
+    Node* nodeToDelete = temp->next;
+    temp->next = temp->next->next;
+    delete nodeToDelete;
+}
 void LinkedList::printList() {
     Node* temp = head;
     while(temp != nullptr) {
@@ -99,7 +145,26 @@ int main() {
     myList.insertTail(1);
     myList.insertHead(8);
     myList.printList();
+
     myList.deleteNode(5);
+    myList.printList();
+
+    myList.insertAt(10, 2);
+    myList.printList();
+
+    myList.insertAt(15, 0);
+    myList.printList();
+
+    myList.insertAt(20, 10); // Out of bounds example
+    myList.printList();
+
+    myList.deleteAt(2);
+    myList.printList();
+
+    myList.deleteAt(0);
+    myList.printList();
+
+    myList.deleteAt(10); // Out of bounds example
     myList.printList();
     return 0;
 }
