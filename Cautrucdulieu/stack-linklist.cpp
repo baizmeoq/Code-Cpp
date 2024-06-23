@@ -22,8 +22,9 @@ class Stack {
 
         void push(int x);
         void pop();
-        int peek();
-        bool isEmpty();
+        int peek() const;
+        bool isEmpty() const;
+        void printStack() const;
 
 };
 // Thêm phần tử vào stack
@@ -44,7 +45,7 @@ void Stack::pop() {
     delete temp;
 }
 // Lấy phần tử trên cùng mà không loại bỏ
-int Stack::peek() {
+int Stack::peek() const {
     if(isEmpty()) {
         cout<<"Stack rỗng!"<<endl;
         return -1;
@@ -52,8 +53,21 @@ int Stack::peek() {
     return top->data;
 }
 // Kiểm tra stack có rỗng hay không
-bool Stack::isEmpty() {
+bool Stack::isEmpty() const {
     return top == nullptr;
+}
+void Stack::printStack() const {
+    if(isEmpty()) {
+        cout<<"Stack is empty!"<<endl;
+        return;
+    }
+    Node* current = top;
+    cout<<"Stack element: ";
+    while(current != nullptr) {
+        cout<<current->data<<" ";
+        current = current->next;
+    }
+    cout<<endl;
 }
 
 int main(){
@@ -61,10 +75,11 @@ int main(){
     myStack.push(10);
     myStack.push(30);
     myStack.push(15);
-
+    myStack.printStack();
     cout<<"Đỉnh stack: "<<myStack.peek()<<endl;
 
     myStack.pop();
     cout<<"Đỉnh stack sau khi pop: "<<myStack.peek()<<endl;
+    myStack.printStack();
     return 0;
 }
